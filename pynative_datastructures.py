@@ -103,6 +103,19 @@ def couples(l1, l2):
 	return s
 
 
+def remove_intersection(s1, s2):
+	# Find the intersection (common) of two sets 
+	# and remove those elements from the first set
+	if args.verbose:
+		print("\nRemoving intersection of these sets from the first set: ")
+		print(s1, s2)
+		print(f"The intersection: {s1.intersection(s2)}")
+	for element in s1.intersection(s2):
+		s1.discard(element)
+	print(f"Result: {s1}")
+	return s1
+
+
 def test(function, exercise, result, *given):
 	assert result == function(*given), f"Failure exercise {exercise}."
 
@@ -115,11 +128,7 @@ def main():
 	test(reversed_thirds, '3', [11, 45, 8, 23, 14, 12], [45, 11, 23, 8, 12, 14])
 	test(count_distinct, '4', {11: 2, 45: 3, 8: 1, 23: 2, 89: 1}, [11, 45, 8, 11, 23, 45, 23, 45, 89])
 	test(couples, '5', {(7, 49), (2, 4), (4, 16), (8, 64), (6, 36), (3, 9), (5, 25)}, [2, 3, 4, 5, 6, 7, 8], [4, 9, 16, 25, 36, 49, 64])
-	"""
-	test(jumpin_around, '6', , )
-	test(jumpin_around, '7', , )
-	test(jumpin_around, '8', , )
-	"""
+	test(remove_intersection, '6', {65, 42, 78, 23}, {23, 42, 65, 57, 78, 83, 29}, {57, 83, 29, 67, 73, 43, 48})
 
 
 if __name__ == '__main__':
