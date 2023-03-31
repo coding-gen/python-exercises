@@ -116,6 +116,27 @@ def remove_intersection(s1, s2):
 	return s1
 
 
+def clear_redundant(s1, s2):
+	# If one set is subset of other, clear it.
+	if args.verbose:
+		print("\nDetecting subset/superset of: ")
+		print(s1, s2)
+	if s1 == s2:
+		if args.verbose:
+			print("Sets are equal, each is subset of the other. Clearing set 2. ")
+		s2 = set()
+	elif s1.issubset(s2):
+		if args.verbose:
+			print("Set 1 is a subset of set 2.")
+		s1 = set()
+	elif s2.issubset(s1):
+		if args.verbose:
+			print("Set 2 is a subset of set 1.")
+		s2 = set()
+	print((s1, s2))
+	return (s1, s2)
+
+
 def test(function, exercise, result, *given):
 	assert result == function(*given), f"Failure exercise {exercise}."
 
@@ -129,6 +150,11 @@ def main():
 	test(count_distinct, '4', {11: 2, 45: 3, 8: 1, 23: 2, 89: 1}, [11, 45, 8, 11, 23, 45, 23, 45, 89])
 	test(couples, '5', {(7, 49), (2, 4), (4, 16), (8, 64), (6, 36), (3, 9), (5, 25)}, [2, 3, 4, 5, 6, 7, 8], [4, 9, 16, 25, 36, 49, 64])
 	test(remove_intersection, '6', {65, 42, 78, 23}, {23, 42, 65, 57, 78, 83, 29}, {57, 83, 29, 67, 73, 43, 48})
+	test(clear_redundant, '7', (set(), {34, 93, 22, 27, 43, 53, 48}), {27, 43, 34}, {34, 93, 22, 27, 43, 53, 48})
+	test(clear_redundant, '7', (set(), {34, 93, 22, 27, 43, 53, 48}), set(), {34, 93, 22, 27, 43, 53, 48})
+	test(clear_redundant, '7', ({67, 73, 43, 48, 83, 57, 29}, set()), {67, 73, 43, 48, 83, 57, 29}, {73, 48, 83, 57, 29})
+	test(clear_redundant, '7', ({67, 73, 43, 48, 83, 57, 29}, set()), {67, 73, 43, 48, 83, 57, 29}, {67, 73, 43, 48, 83, 57, 29})
+	test(clear_redundant, '7', ({48, 34, 53, 22, 27, 43, 93}, {49, 67, 83, 73, 44, 29, 57}), {34, 93, 22, 27, 43, 53, 48}, {67, 73, 44, 49, 83, 57, 29})
 
 
 if __name__ == '__main__':
