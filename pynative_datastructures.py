@@ -133,8 +133,28 @@ def clear_redundant(s1, s2):
 		if args.verbose:
 			print("Set 2 is a subset of set 1.")
 		s2 = set()
-	print((s1, s2))
+	print(f"Result: {(s1, s2)}")
 	return (s1, s2)
+
+
+def not_in_values(l, d):
+	# Remove all elements of l which are not values of d
+	if args.verbose:
+		print(f"\nFind elements of list that are values of dictionary: ")
+		print(l, d)
+	result = [element for element in l if element in d.values()]
+	print(f"Result: {result}")
+	return result
+
+
+def deduped_list_of_values(d):
+	# Get a list of all values in d, sorted, without duplicates
+	if args.verbose:
+		print(f"\nUnique and sort all values of dictionary as a list: ")
+		print(d)
+	s = set(d.values())
+	print(f"Result: {list(s)}")
+	return list(s)
 
 
 def test(function, exercise, result, *given):
@@ -155,6 +175,8 @@ def main():
 	test(clear_redundant, '7', ({67, 73, 43, 48, 83, 57, 29}, set()), {67, 73, 43, 48, 83, 57, 29}, {73, 48, 83, 57, 29})
 	test(clear_redundant, '7', ({67, 73, 43, 48, 83, 57, 29}, set()), {67, 73, 43, 48, 83, 57, 29}, {67, 73, 43, 48, 83, 57, 29})
 	test(clear_redundant, '7', ({48, 34, 53, 22, 27, 43, 93}, {49, 67, 83, 73, 44, 29, 57}), {34, 93, 22, 27, 43, 53, 48}, {67, 73, 44, 49, 83, 57, 29})
+	test(not_in_values, '8', [47, 69, 76, 97], [47, 64, 69, 37, 76, 83, 95, 97], {'Annie':47, 'Emma':69, 'Kelly':76, 'Jason':97})
+	test(deduped_list_of_values, '9', [44, 47, 52, 53, 54], {'jan': 47, 'feb': 52, 'march': 47, 'April': 44, 'May': 52, 'June': 53, 'july': 54, 'Aug': 44, 'Sept': 54})
 
 
 if __name__ == '__main__':
