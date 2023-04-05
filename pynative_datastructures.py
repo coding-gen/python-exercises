@@ -137,7 +137,7 @@ def clear_redundant(s1, s2):
 	return (s1, s2)
 
 
-def not_in_values(l, d):
+def elements_in_values(l, d):
 	# Remove all elements of l which are not values of d
 	if args.verbose:
 		print(f"\nFind elements of list that are values of dictionary: ")
@@ -155,6 +155,24 @@ def deduped_list_of_values(d):
 	s = set(d.values())
 	print(f"Result: {list(s)}")
 	return list(s)
+
+
+def unique_tuple(l):
+	# Remove duplicates, return min, max and tuple of remaining.
+	if args.verbose:
+		print(f"\nUnique and min max this list and return a tuple: ")
+		print(l)
+	l = tuple(list(set(l)))
+	print(f"Result: {min(l)}, {max(l)}, {l}")
+	return (min(l), max(l), l)
+
+
+def test_tuple(function, exercise, result, *given):
+	r = function(*given)
+	assert result[0] == r[0], f"Failure exercise {exercise}: min wrong." 
+	assert result[1] == r[1], f"Failure exercise {exercise}: max wrong."
+	assert sum(result[2]) == sum(r[2]), f"Failure exercise {exercise}."
+	assert len(result[2]) == len(r[2]), f"Failure exercise {exercise}."
 
 
 def test(function, exercise, result, *given):
@@ -175,8 +193,10 @@ def main():
 	test(clear_redundant, '7', ({67, 73, 43, 48, 83, 57, 29}, set()), {67, 73, 43, 48, 83, 57, 29}, {73, 48, 83, 57, 29})
 	test(clear_redundant, '7', ({67, 73, 43, 48, 83, 57, 29}, set()), {67, 73, 43, 48, 83, 57, 29}, {67, 73, 43, 48, 83, 57, 29})
 	test(clear_redundant, '7', ({48, 34, 53, 22, 27, 43, 93}, {49, 67, 83, 73, 44, 29, 57}), {34, 93, 22, 27, 43, 53, 48}, {67, 73, 44, 49, 83, 57, 29})
-	test(not_in_values, '8', [47, 69, 76, 97], [47, 64, 69, 37, 76, 83, 95, 97], {'Annie':47, 'Emma':69, 'Kelly':76, 'Jason':97})
+	test(elements_in_values, '8', [47, 69, 76, 97], [47, 64, 69, 37, 76, 83, 95, 97], {'Annie':47, 'Emma':69, 'Kelly':76, 'Jason':97})
 	test(deduped_list_of_values, '9', [44, 47, 52, 53, 54], {'jan': 47, 'feb': 52, 'march': 47, 'April': 44, 'May': 52, 'June': 53, 'july': 54, 'Aug': 44, 'Sept': 54})
+	test_tuple(unique_tuple, '10', (41, 99, (87, 45, 94, 41, 65, 99)), [87, 45, 41, 65, 94, 41, 99, 94])
+
 
 
 if __name__ == '__main__':
