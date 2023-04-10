@@ -4,7 +4,7 @@
 Author: Genevieve LaLonde
 
 Python Dataset coding exercise from: 
-# https://pynative.com/python-functions-exercise-with-solutions/
+https://pynative.com/python-functions-exercise-with-solutions/
 """
 
 import argparse
@@ -37,6 +37,21 @@ def print_many_args(*arguments):
 	return (arguments)
 
 
+def calculation(a, b):
+	# Return the addition and subtraction of 2 numbers in 1 result.
+	if args.verbose:
+		print("\nCalculating on these arguments.")
+		print(a, b)
+	print(f"Result: {a + b, a - b}")
+	return a + b, a - b
+
+
+def show_employee(name, salary=9000):
+	# Display the name and salary of an employee. Default salary=9000.
+	print(f"Name: {name}, Salary: {salary}")
+	return name, salary
+
+
 def test_tuple(function, exercise, result, *given):
 	r = function(*given)
 	assert result[0] == r[0], f"Failure exercise {exercise}: min wrong." 
@@ -53,6 +68,10 @@ def main():
 	test(print_2_args, 1, ('Rebecca', 24), 'Rebecca', 24)
 	test(print_many_args, 2, ('Rebecca', 24), 'Rebecca', 24)
 	test(print_many_args, 2, ('Annie', 781, 'b2', 'Jemima', 7.24), 'Annie', 781, 'b2', 'Jemima', 7.24)
+	test(calculation, 3, (50, 30), 40, 10)
+	test(show_employee, 4, ("Ben", 12000), "Ben", 12000)
+	test(show_employee, 4, ("Jessa", 9000), "Jessa")
+
 
 
 if __name__ == '__main__':
