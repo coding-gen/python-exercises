@@ -52,6 +52,39 @@ def show_employee(name, salary=9000):
 	return name, salary
 
 
+def outer_addition(a, b):
+	# Create an outer and inner function. 
+	# The inner function adds the parameters.
+	# The outer function adds 5 more.
+	if args.verbose:
+		print(f"\nAdding 3 times {b}, and 5 to {a}.")
+	def inner_addition(x, y):
+		return x + y
+
+	add_once = inner_addition(a, b)
+	add_twice = inner_addition(add_once, b)
+	add_thrice = inner_addition(add_twice, b)
+	result = inner_addition(add_thrice, 5)
+
+	print(f"Result: {result}")
+	return result
+
+
+def recur_addition(n):
+	if n == 1:
+		return 1
+	return n + recur_addition(n - 1)
+
+
+def recur_addition_wrapper(n):
+	# Calculate the sum of numbers from 0 to n recursively.
+	if args.verbose:
+		print(f"\nCalculating sum from 0 to {n}.")
+	result = recur_addition(n)
+	print(f"Result: {result}")
+	return result
+
+
 def test_tuple(function, exercise, result, *given):
 	r = function(*given)
 	assert result[0] == r[0], f"Failure exercise {exercise}: min wrong." 
@@ -71,7 +104,8 @@ def main():
 	test(calculation, 3, (50, 30), 40, 10)
 	test(show_employee, 4, ("Ben", 12000), "Ben", 12000)
 	test(show_employee, 4, ("Jessa", 9000), "Jessa")
-
+	test(outer_addition, 5, 28, 2, 7)
+	test(recur_addition_wrapper, 6, 55, 10)
 
 
 if __name__ == '__main__':
