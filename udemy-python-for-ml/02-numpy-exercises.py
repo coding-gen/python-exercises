@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ___
+# Author of exercise solutions: Genevieve LaLonde
 
+# ___
 # # NumPy Exercises 
 # 
 # Now that we've learned about NumPy let's test your knowledge. 

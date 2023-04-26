@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# Author of exercise solutions: Genevieve LaLonde
+
 # ___
 # # Python Crash Course Exercises 
 # This is an optional exercise to test your understanding of Python Basics. 
