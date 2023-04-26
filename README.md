@@ -1,2 +1,3 @@
 # python-exercises
-Just some python exercises to keep my skills up.
+
+Some python exercises to keep my skills up.
