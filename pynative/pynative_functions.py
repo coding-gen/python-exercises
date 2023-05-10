@@ -85,6 +85,27 @@ def recur_addition_wrapper(n):
 	return result
 
 
+def evens(n, m):
+	# Generate a list of even numbers between n and m.
+	if args.verbose:
+		print(f"\nEven numbers from {n} to {m}.")
+	result = list(range(n, m, 2))
+	print(f"Result: {result}")
+	return result
+
+def max_item(l):
+	# Return the max item of the list.
+	if args.verbose:
+		print(f"\nMax item in list: {l}.")
+	m = l[0]
+	for item in l:
+		if item > m:
+			m = item
+	result = m
+	print(f"Result: {result}")
+	return result
+
+
 def test_tuple(function, exercise, result, *given):
 	r = function(*given)
 	assert result[0] == r[0], f"Failure exercise {exercise}: min wrong." 
@@ -98,6 +119,8 @@ def test(function, exercise, result, *given):
 
 
 def main():
+	# Usage: test(function_name, exercise_number, expected_result, input[s])
+
 	test(print_2_args, 1, ('Rebecca', 24), 'Rebecca', 24)
 	test(print_many_args, 2, ('Rebecca', 24), 'Rebecca', 24)
 	test(print_many_args, 2, ('Annie', 781, 'b2', 'Jemima', 7.24), 'Annie', 781, 'b2', 'Jemima', 7.24)
@@ -106,6 +129,9 @@ def main():
 	test(show_employee, 4, ("Jessa", 9000), "Jessa")
 	test(outer_addition, 5, 28, 2, 7)
 	test(recur_addition_wrapper, 6, 55, 10)
+	# exercise 7 was dumb.
+	test(evens, 8, [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28], 4, 30)
+	test(max_item, 9, 24, [4, 6, 8, 24, 12, 2])
 
 
 if __name__ == '__main__':

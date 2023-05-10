@@ -35,6 +35,7 @@ args = parser.parse_args()
 
 
 def main():
+	log_level=logging.WARNING
 	if args.verbose:
 		log_level=logging.INFO
 	if args.outfile:
