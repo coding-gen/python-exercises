@@ -22,7 +22,10 @@ class Vehicle:
 
 
 	def __str__(self):
-		return f"name: {self.name}\nspeed: {self.max_speed}\nmileage: {self.mileage}\nseating: {self.capacity}"
+		items = vars(self)
+		l =[f"{key}: {items[key]}" for key in items]
+		s = "\n".join(l)
+		return s
 
 
 class Bus(Vehicle):
