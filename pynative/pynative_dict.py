@@ -51,6 +51,17 @@ def test(function, exercise, message, result, *given):
 	assert result == function_result, f"Failure exercise {exercise}."
 
 
+def extract_keys(keys, d):
+	return {key: d[key] for key in keys}
+
+
+def delete_keys(keys, d):
+	for key in keys:
+		if key in d:
+			d.pop(key)
+	return d
+
+
 def main():
 	# Usage: test(function_name, exercise_number, expected_result, input[s])
 
@@ -82,6 +93,22 @@ def main():
 		"Initializing new employees database for employees {}.",
 		{'Kelly': {'designation': 'Developer', 'salary': 8000}, 'Emma': {'designation': 'Developer', 'salary': 8000}},
 		['Kelly', 'Emma']
+		)
+	test(
+		extract_keys, 
+		5,
+		"Exctracting keys {} from dict {}.",
+		{'name': 'Kelly', 'salary': 8000},
+		["name", "salary"],
+		{"name": "Kelly", "age":25,  "salary": 8000,  "city": "New york"}
+		)
+	test(
+		delete_keys, 
+		6,
+		"Deleting keys {} from dict {}.",
+		{'city': 'New york', 'age': 25},
+		["name", "salary"],
+		{"name": "Kelly", "age":25,  "salary": 8000,  "city": "New york"}
 		)
 
 
