@@ -42,15 +42,6 @@ def dict_default_create(keys, values={"designation": 'Developer', "salary": 8000
 	return dict.fromkeys(keys, values)
 
 
-def test(function, exercise, message, result, *given):
-	if args.verbose:
-		print(f"\nExercise {exercise}")
-		print(message.format(*given))
-	function_result = function(*given)
-	print(f"Result: {function_result}")
-	assert result == function_result, f"Failure exercise {exercise}."
-
-
 def extract_keys(keys, d):
 	return {key: d[key] for key in keys}
 
@@ -60,6 +51,33 @@ def delete_keys(keys, d):
 		if key in d:
 			d.pop(key)
 	return d
+
+
+def check_existence(d, v):
+	return v in d.values()
+
+
+def rename_key(d, old_k, new_k):
+	d[new_k] = d.pop(old_k)
+	return d
+
+
+def min_valued_key(d):
+	# Order by the values, and return the smallest valued dict key.
+	return min(d, key=d.get) 
+
+
+def dict_create_fromkeys(d):
+	return dict.fromkeys(d.keys())
+
+
+def test(function, exercise, message, result, *given):
+	if args.verbose:
+		print(f"\nExercise {exercise}")
+		print(message.format(*given))
+	function_result = function(*given)
+	print(f"Result: {function_result}")
+	assert result == function_result, f"Failure exercise {exercise}."
 
 
 def main():
@@ -110,6 +128,52 @@ def main():
 		["name", "salary"],
 		{"name": "Kelly", "age":25,  "salary": 8000,  "city": "New york"}
 		)
+	test(
+		check_existence,
+		7, 
+		"The dict {} contains the value {}: ",
+		True,
+		{'a': 100, 'b': 200, 'c': 300},
+		200
+		)
+	test(
+		rename_key,
+		8, 
+		"In dict {} renaming key `{}` to `{}`.",
+		{'name': 'Kelly', 'age': 25, 'salary': 8000, 'location': 'New york'},
+		{
+		"name": "Kelly",
+		"age":25,
+		"salary": 8000,
+		"city": "New york"
+		},
+		'city', 
+		'location'
+		)
+	test(
+		min_valued_key,
+		9,
+		"The class with the least students out of: {}",
+		'Math',
+		{
+		'Physics': 82,
+		'Math': 65,
+		'History': 75
+		}
+		)
+	test(
+		dict_create_fromkeys,
+		11, 
+		"Creating empty dict from the keys of {}",
+		{'name': None, 'age': None, 'salary': None, 'city': None},
+		{
+			"name": "Kelly",
+			"age": 25,
+			"salary": 8000,
+			"city": "New york"
+			}
+		)
+
 
 
 if __name__ == '__main__':
