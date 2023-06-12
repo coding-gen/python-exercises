@@ -67,6 +67,14 @@ def min_valued_key(d):
 	return min(d, key=d.get) 
 
 
+def salary_update(d, name, salary):
+	# Here we assume name is a primary key, due to the simplicity of the data structure
+	for record in d.values():
+		if record['name'] == name:
+			record['salary'] = salary
+	return d
+
+
 def dict_create_fromkeys(d):
 	return dict.fromkeys(d.keys())
 
@@ -161,6 +169,24 @@ def main():
 		'History': 75
 		}
 		)
+	test(
+		salary_update,
+		10,
+		"Updating {} so that {} has salary: {}.",
+		{
+			'emp1': {'name': 'Jhon', 'salary': 7500},
+			'emp2': {'name': 'Emma', 'salary': 8000},
+			'emp3': {'name': 'Brad', 'salary': 8500}
+		},
+		{
+			'emp1': {'name': 'Jhon', 'salary': 7500},
+			'emp2': {'name': 'Emma', 'salary': 8000},
+			'emp3': {'name': 'Brad', 'salary': 500}
+		},
+		'Brad',
+		8500
+		)
+
 	test(
 		dict_create_fromkeys,
 		11, 
